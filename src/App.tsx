@@ -31,21 +31,21 @@ export default function App() {
   const [currentContent, setCurrentContent] = useState('');
   const [libraryContext, setLibraryContext] = useState('');
   const [manualsCache, setManualsCache] = useState<Record<string, string>>({});
-  const [fileName, setFileName] = useState('Guia Centa_papa.pdf');
+  const [fileName, setFileName] = useState('guia-centa-papa.pdf');
   const [isProcessingFile, setIsProcessingFile] = useState(false);
-  const [pdfUrl, setPdfUrl] = useState<string | null>('/Guia Centa_papa.pdf');
+  const [pdfUrl, setPdfUrl] = useState<string | null>('/guia-centa-papa.pdf');
   const chatWindowRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Lista de manuales oficiales cargados en /public/
   const MANUALS_LIBRARY = [
-    { id: 'papa', name: 'Guía Centa Papa', file: '/Guia Centa_papa.pdf' },
-    { id: 'arroz', name: 'Guía Centa Arroz', file: '/Guia Centa_Arroz.pdf' },
-    { id: 'maiz', name: 'Guía Centa Maíz', file: '/Guia Centa_Maiz.pdf' },
-    { id: 'pepino', name: 'Guía Centa Pepino', file: '/Guia Centa_pepino.pdf' },
-    { id: 'tomate', name: 'Guía Centa Tomate', file: '/Guia-Centa-Tomate.pdf' },
-    { id: 'frijol', name: 'Guía Centa Frijol', file: '/Guia Centa_Frijol.pdf' },
-    { id: 'cebolla', name: 'Guía Centa Cebolla', file: '/Guia Centa_cebolla.pdf' },
+    { id: 'papa', name: 'Guía Centa Papa', file: '/guia-centa-papa.pdf' },
+    { id: 'arroz', name: 'Guía Centa Arroz', file: '/guia-centa-arroz.pdf' },
+    { id: 'maiz', name: 'Guía Centa Maíz', file: '/guia-centa-maiz.pdf' },
+    { id: 'pepino', name: 'Guía Centa Pepino', file: '/guia-centa-pepino.pdf' },
+    { id: 'tomate', name: 'Guía Centa Tomate', file: '/guia-centa-tomate.pdf' },
+    { id: 'frijol', name: 'Guía Centa Frijol', file: '/guia-centa-frijol.pdf' },
+    { id: 'cebolla', name: 'Guía Centa Cebolla', file: '/guia-centa-cebolla.pdf' },
   ];
 
   useEffect(() => {
