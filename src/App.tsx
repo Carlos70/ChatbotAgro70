@@ -31,21 +31,20 @@ export default function App() {
   const [currentContent, setCurrentContent] = useState('');
   const [libraryContext, setLibraryContext] = useState('');
   const [manualsCache, setManualsCache] = useState<Record<string, string>>({});
-  const [fileName, setFileName] = useState('guia-centa-papa.pdf');
+  const [fileName, setFileName] = useState('guia_centa_papa.pdf');
   const [isProcessingFile, setIsProcessingFile] = useState(false);
-  const [pdfUrl, setPdfUrl] = useState<string | null>('/guia-centa-papa.pdf');
+  const [pdfUrl, setPdfUrl] = useState<string | null>('/guia_centa_papa.pdf');
   const chatWindowRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Lista de manuales oficiales cargados en /public/
   const MANUALS_LIBRARY = [
-    { id: 'papa', name: 'Guía Centa Papa', file: '/guia-centa-papa.pdf' },
-    { id: 'arroz', name: 'Guía Centa Arroz', file: '/guia-centa-arroz.pdf' },
-    { id: 'maiz', name: 'Guía Centa Maíz', file: '/guia-centa-maiz.pdf' },
-    { id: 'pepino', name: 'Guía Centa Pepino', file: '/guia-centa-pepino.pdf' },
-    { id: 'tomate', name: 'Guía Centa Tomate', file: '/guia-centa-tomate.pdf' },
-    { id: 'frijol', name: 'Guía Centa Frijol', file: '/guia-centa-frijol.pdf' },
-    { id: 'cebolla', name: 'Guía Centa Cebolla', file: '/guia-centa-cebolla.pdf' },
+    { id: 'papa', name: 'Guía Centa Papa', file: '/guia_centa_papa.pdf' },
+    { id: 'arroz', name: 'Guía Centa Arroz', file: '/guia_centa_arroz.pdf' },
+    { id: 'pepino', name: 'Guía Centa Pepino', file: '/guia_centa_pepino.pdf' },
+    { id: 'tomate', name: 'Guía Centa Tomate', file: '/guia_centa_tomate.pdf' },
+    { id: 'frijol', name: 'Guía Centa Frijol', file: '/guia_centa_frijol.pdf' },
+    { id: 'cebolla', name: 'Guía Centa Cebolla', file: '/guia_centa_cebolla.pdf' },
   ];
 
   useEffect(() => {
@@ -59,7 +58,7 @@ export default function App() {
         let content = '';
         
         try {
-          const response = await fetch(encodeURI(manual.file));
+          const response = await fetch(manual.file);
           if (response.ok) {
             const arrayBuffer = await response.arrayBuffer();
             content = await extractTextFromPDF(arrayBuffer);
@@ -309,7 +308,7 @@ ${currentContent}`
           <div className="flex flex-wrap justify-center gap-4">
             <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-slate-200 shadow-sm text-sm text-slate-500">
               <Leaf size={16} className="text-[#2e7d32]" />
-              Especializado en Papa, Pepino e Hidroponía
+              Especializado en Granos Básicos y Hortalizas de El Salvador
             </div>
           </div>
         </div>
@@ -384,7 +383,7 @@ ${currentContent}`
                 {pdfUrl ? (
                   <iframe 
                     key={pdfUrl}
-                    src={`${encodeURI(pdfUrl)}#toolbar=0&navpanes=0`} 
+                    src={`${pdfUrl}#toolbar=0&navpanes=0`} 
                     className="w-full h-full border-none"
                     title="Visor de PDF"
                   />
@@ -484,7 +483,7 @@ ${currentContent}`
             <a href="#" className="text-slate-400 hover:text-[#2e7d32] transition-colors"><Leaf size={20} /></a>
           </div>
           <p className="text-slate-500 text-sm">
-            © 2026 DocuExpert AI. Todos los derechos reservados.
+            © 2026 AgroExpert AI. Todos los derechos reservados.
           </p>
         </div>
       </footer>
