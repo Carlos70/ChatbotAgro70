@@ -202,16 +202,18 @@ export default function App() {
     setMessages(prev => [...prev, loadingMessage]);
 
     try {
-      const model = "gemini-3-flash-preview";
+      if (!process.env.GEMINI_API_KEY) {
+        throw new Error("La clave de API de Gemini no está configurada. Por favor, revisa la configuración del entorno.");
+      }
+      console.log("Iniciando consulta a Gemini...");
+      const model = "gemini-flash-latest";
       const response = await genAI.models.generateContent({
         model,
-        contents: [{
-          parts: [{ text }]
-        }],
+        contents: text,
         config: {
           systemInstruction: `Eres un asistente virtual especializado en agricultura en El Salvador. Tu función es brindar recomendaciones técnicas claras, prácticas y útiles sobre el manejo de cultivos como maíz, frijol, arroz, papa, tomate, cebolla y pepino.
 
-IMPORTANTE: Tienes acceso a una BIBLIOTECA COMPLETA de 7 manuales técnicos (Maíz, Frijol, Arroz, Papa, Tomate, Cebolla, Pepino). Debes usar la información de TODOS estos manuales para responder. Si el usuario pregunta por un cultivo específico, busca en la sección correspondiente de la biblioteca.
+IMPORTANTE: Tienes acceso a una BIBLIOTECA COMPLETA de manuales técnicos. Debes usar la información de estos manuales para responder. Si el usuario pregunta por un cultivo específico, busca en la sección correspondiente de la biblioteca.
 
 Responde únicamente preguntas relacionadas con agricultura.
 
@@ -246,10 +248,10 @@ Mantén coherencia con el cultivo o tema que el usuario está consultando.
 No cambies de cultivo ni mezcles información de otros cultivos, a menos que el usuario lo solicite explícitamente.
 
 CONTEXTO DE LA BIBLIOTECA Y DOCUMENTOS:
-${libraryContext}
+${libraryContext.slice(0, 30000)}
 
 DOCUMENTO SELECCIONADO O SUBIDO ACTUALMENTE:
-${currentContent}`
+${currentContent.slice(0, 20000)}`
         }
       });
 
