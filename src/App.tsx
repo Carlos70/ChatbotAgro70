@@ -31,20 +31,20 @@ export default function App() {
   const [currentContent, setCurrentContent] = useState('');
   const [libraryContext, setLibraryContext] = useState('');
   const [manualsCache, setManualsCache] = useState<Record<string, string>>({});
-  const [fileName, setFileName] = useState('guia_centa_papa.pdf');
+  const [fileName, setFileName] = useState('GUIA CENTA_PAPA.PDF');
   const [isProcessingFile, setIsProcessingFile] = useState(false);
-  const [pdfUrl, setPdfUrl] = useState<string | null>('/guia_centa_papa.pdf');
+  const [pdfUrl, setPdfUrl] = useState<string | null>('/GUIA CENTA_PAPA.PDF');
   const chatWindowRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Lista de manuales oficiales cargados en /public/
   const MANUALS_LIBRARY = [
-    { id: 'papa', name: 'Guía Centa Papa', file: '/guia_centa_papa.pdf' },
-    { id: 'arroz', name: 'Guía Centa Arroz', file: '/guia_centa_arroz.pdf' },
-    { id: 'pepino', name: 'Guía Centa Pepino', file: '/guia_centa_pepino.pdf' },
-    { id: 'tomate', name: 'Guía Centa Tomate', file: '/guia_centa_tomate.pdf' },
-    { id: 'frijol', name: 'Guía Centa Frijol', file: '/guia_centa_frijol.pdf' },
-    { id: 'cebolla', name: 'Guía Centa Cebolla', file: '/guia_centa_cebolla.pdf' },
+    { id: 'papa', name: 'Guía Centa Papa', file: '/GUIA CENTA_PAPA.PDF' },
+    { id: 'arroz', name: 'Guía Centa Arroz', file: '/GUIA CENTA_ARROZ.PDF' },
+    { id: 'pepino', name: 'Guía Centa Pepino', file: '/GUIA CENTA_PEPINO.PDF' },
+    { id: 'tomate', name: 'Guía Centa Tomate', file: '/GUIA CENTA_TOMATE.PDF' },
+    { id: 'frijol', name: 'Guía Centa Frijol', file: '/GUIA CENTA_FRIJOL.PDF' },
+    { id: 'cebolla', name: 'Guía Centa Cebolla', file: '/GUIA CENTA_CEBOLLA.PDF' },
   ];
 
   useEffect(() => {
@@ -319,57 +319,56 @@ ${currentContent}`
         <div className="bg-white rounded-3xl shadow-2xl shadow-slate-200/50 border border-slate-200 overflow-hidden flex flex-col md:flex-row h-[800px]">
           
           {/* LADO IZQUIERDO: Visualizador de Documento */}
-          <div className={`transition-all duration-500 ease-in-out bg-slate-50 border-r border-slate-200 flex flex-col ${isSidebarOpen ? 'w-full md:w-1/2' : 'w-0 opacity-0 overflow-hidden'}`}>
-            <div className="p-4 bg-slate-800 text-white flex justify-between items-center shrink-0">
-              <div className="flex items-center gap-2 overflow-hidden">
-                <FileText size={18} className="text-amber-400 shrink-0" />
-                <span className="font-bold text-xs uppercase tracking-widest truncate" title={fileName}>
+            <div className={`transition-all duration-500 ease-in-out bg-slate-50 border-r border-slate-200 flex flex-col ${isSidebarOpen ? 'w-full md:w-1/2' : 'w-0 opacity-0 overflow-hidden'}`}>
+            <div className="p-5 bg-[#1e293b] text-white flex justify-between items-center shrink-0 shadow-lg">
+              <div className="flex items-center gap-3 overflow-hidden">
+                <FileText size={20} className="text-amber-400 shrink-0" />
+                <span className="font-black text-[11px] uppercase tracking-[0.15em] truncate" title={fileName}>
                   {fileName}
                 </span>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-5">
                 <input 
                   type="file" 
                   ref={fileInputRef} 
                   onChange={handleFileUpload} 
                   className="hidden" 
-                  accept=".pdf,.txt,.md,.json,.js,.ts"
+                  accept=".pdf"
                 />
                 <button 
                   onClick={() => fileInputRef.current?.click()}
-                  className="hover:text-amber-400 transition-colors flex items-center gap-1 text-[10px] font-black tracking-tighter"
-                  title="Subir nuevo archivo"
+                  className="hover:text-amber-400 transition-colors flex items-center gap-2 text-[10px] font-black tracking-widest"
                   disabled={isProcessingFile}
                 >
-                  {isProcessingFile ? <Loader2 size={14} className="animate-spin" /> : <Upload size={14} />}
-                  <span>{isProcessingFile ? 'PROCESANDO...' : 'SUBIR'}</span>
+                  {isProcessingFile ? <Loader2 size={14} className="animate-spin" /> : <Upload size={16} />}
+                  <span>SUBIR</span>
                 </button>
                 <button 
                   onClick={resetToDefault}
                   className="hover:text-amber-400 transition-colors"
-                  title="Restablecer original"
+                  title="Restablecer"
                 >
-                  <RefreshCw size={14} />
+                  <RefreshCw size={16} />
                 </button>
                 <button onClick={() => setIsSidebarOpen(false)} className="hover:text-amber-400 transition-colors">
-                  <Minimize2 size={16} />
+                  <Maximize2 size={18} className="rotate-45" />
                 </button>
               </div>
             </div>
-            <div className="flex-1 overflow-y-auto p-6 md:p-10 bg-slate-100/50">
+            <div className="flex-1 overflow-y-auto p-8 bg-[#f8fafc]">
               {/* Biblioteca de Manuales Rápidos */}
-              <div className="max-w-2xl mx-auto mb-8">
-                <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4">Biblioteca de Manuales</h4>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="max-w-3xl mx-auto mb-10">
+                <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.25em] mb-6 pl-1">Biblioteca de Manuales</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {MANUALS_LIBRARY.map((manual) => (
                     <button
                       key={manual.id}
                       onClick={() => loadManualFromLibrary(manual)}
                       disabled={isProcessingFile}
-                      className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl hover:border-[#2e7d32] hover:shadow-md transition-all text-left group disabled:opacity-50"
+                      className="flex items-center gap-4 p-4 bg-white border border-slate-100 rounded-2xl hover:border-[#2e7d32] hover:shadow-xl transition-all text-left group disabled:opacity-50"
                     >
-                      <div className="bg-slate-100 p-2 rounded-lg group-hover:bg-[#e8f5e9] transition-colors">
-                        <FileText size={16} className="text-slate-400 group-hover:text-[#2e7d32]" />
+                      <div className="bg-slate-50 p-2.5 rounded-xl group-hover:bg-[#e8f5e9] transition-colors">
+                        <FileText size={20} className="text-slate-400 group-hover:text-[#2e7d32]" />
                       </div>
                       <span className="text-[11px] font-bold text-slate-600 group-hover:text-slate-900 leading-tight">
                         {manual.name}
@@ -379,16 +378,28 @@ ${currentContent}`
                 </div>
               </div>
 
-              <div className="max-w-4xl mx-auto bg-white shadow-sm border border-slate-200 h-[calc(100vh-250px)] rounded-sm overflow-hidden">
+              <div className="max-w-5xl mx-auto bg-white shadow-2xl border border-slate-200 min-h-[800px] rounded-xl overflow-hidden">
                 {pdfUrl ? (
-                  <iframe 
-                    key={pdfUrl}
-                    src={`${pdfUrl}#toolbar=0&navpanes=0`} 
-                    className="w-full h-full border-none"
-                    title="Visor de PDF"
-                  />
+                  <div className="w-full h-full flex flex-col min-h-[800px]">
+                    <embed 
+                      key={pdfUrl}
+                      src={`${pdfUrl}#toolbar=0&navpanes=0`} 
+                      type="application/pdf"
+                      className="w-full flex-1 min-h-[800px] border-none"
+                    />
+                    <div className="p-3 bg-slate-50 border-t border-slate-100 text-[10px] text-slate-400 flex justify-between items-center px-6">
+                      <span className="font-medium">Vista previa del documento técnico</span>
+                      <a 
+                        href={pdfUrl} 
+                        download 
+                        className="text-[#2e7d32] font-bold hover:underline flex items-center gap-1.5"
+                      >
+                        Descargar Manual Completo
+                      </a>
+                    </div>
+                  </div>
                 ) : (
-                  <div className="p-8 md:p-12 h-full overflow-y-auto">
+                  <div className="p-10 md:p-16 h-full overflow-y-auto">
                     <div className="prose prose-slate prose-sm max-w-none">
                       <ReactMarkdown>{currentContent}</ReactMarkdown>
                     </div>
